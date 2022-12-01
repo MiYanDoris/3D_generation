@@ -229,7 +229,7 @@ class ImageFolderDataset(Dataset):
                     useful_folder_list = set(folder_list).intersection(valid_folder_list)
                     folder_list = sorted(list(useful_folder_list))
             print('==> use shapenet folder number %s' % (len(folder_list)))
-            folder_list = [os.path.join(root, f) for f in folder_list]
+            folder_list = [os.path.join(root, f, 'models') for f in folder_list]
             all_img_list = []
             all_mask_list = []
 

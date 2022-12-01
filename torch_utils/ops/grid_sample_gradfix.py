@@ -55,12 +55,19 @@ class _GridSample2dForward(torch.autograd.Function):
 
 
 # ----------------------------------------------------------------------------
+from pkg_resources import parse_version
+_use_pytorch_1_11_api = parse_version(torch.__version__) >= parse_version('1.11.0a') # Allow prerelease builds of 1.11
 
 class _GridSample2dBackward(torch.autograd.Function):
     @staticmethod
     def forward(ctx, grad_output, input, grid):
         op = torch._C._jit_get_operation('aten::grid_sampler_2d_backward')
-        grad_input, grad_grid = op(grad_output, input, grid, 0, 0, False)
+        if _use_pytorch_1_11_api:
+            output_mask = (ctx.needs_input_grad[1], ctx.needs_input_grad[2])
+            grad_input, grad_grid = op(grad_output, input, grid, 0, 0, False, output_mask)
+        else:
+            grad_input, grad_grid = op(grad_output, input, grid, 0, 0, False)
+        # grad_input, grad_grid = op(grad_output, input, grid, 0, 0, False)
         ctx.save_for_backward(grid)
         return grad_input, grad_grid
 

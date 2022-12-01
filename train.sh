@@ -1,0 +1,1 @@
+CUDA_VISIBLE_DEVICES=1,2 python train_3d.py --outdir=/data1/miyan/GET3D --data=/data1/miyan/ShapeNetRender/03001627/img --camera_path /data1/miyan/ShapeNetRender/03001627/camera --gpus=2 --batch=16 --gamma=400 --data_camera_mode shapenet_chair  --dmtet_scale 0.8  --use_shapenet_split 1  --one_3d_generator 1  --fp32 0

@@ -147,7 +147,6 @@ def training_loop(
 
     if rank == 0:
         print('Constructing networks...')
-
     # Constructing networks
     common_kwargs = dict(
         c_dim=training_set.label_dim, img_resolution=training_set.resolution, img_channels=training_set.num_channels)

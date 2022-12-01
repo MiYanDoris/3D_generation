@@ -25,7 +25,7 @@ def compute_fid(opts, max_real, num_gen):
     ########## detector_url = 'https://api.ngc.nvidia.com/v2/models/nvidia/research/stylegan3/versions/1/files/metrics/inception-2015-12-05.pkl'
     code_folder = os.getcwd()
     detector_url = os.path.join(code_folder, 'cache/inception-2015-12-05.pkl')
-    # assert os.path.exists(detecto≤r_url)
+    assert os.path.exists(detector_url)
     detector_kwargs = dict(return_features=True)  # Return raw features before the softmax layer.
     mu_real, sigma_real = metric_utils.compute_feature_stats_for_dataset(
         opts=opts, detector_url=detector_url, detector_kwargs=detector_kwargs,
